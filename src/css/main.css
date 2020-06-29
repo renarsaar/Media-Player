@@ -1,23 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
-
 * {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
-}
+  padding: 0; }
 
 body {
   font-family: "Raleway", sans-serif;
-  background: rgb(226, 129, 46);
-  background: linear-gradient(
-    90deg,
-    rgba(226, 129, 46, 1) 0%,
-    rgba(226, 162, 33, 1) 100%
-  );
+  background: #e2812e;
+  background: linear-gradient(90deg, #e2812e 0%, #e2a221 100%);
   color: red;
   font-size: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-}
+  min-height: 100vh; }
