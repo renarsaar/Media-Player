@@ -1,29 +1,52 @@
 import React from "react";
+import youtube from "./apis/videos";
 
-import { connect } from "react-redux";
-import { fetchVideos } from "../components/actions";
-
-// const App = () => {
-//   return <div className="myapp">App</div>;
-// };
+import SearchBar from "./SearchBar";
+import VideoDetail from "./VideoDetail";
+import VideoList from "./VideoList";
 
 class App extends React.Component {
-  componentDidMount(props) {
-    this.props.fetchVideos();
-    // console.log(this.props);
+  state = { videos: [], selectedVideo: null };
+
+  componentDidMount() {
+    // Default videos
+    this.onTermSubmit("chessable masters");
   }
 
-  render() {
-    console.log(this.props);
+  onTermSubmit = async (term) => {
+    const KEY = "AIzaSyCGPm14uBuAUYoBHN0XnjxsRPgBqTy3xMs";
 
-    return <div>App</div>;
+    const res = await youtube.get("/search", {
+      params: {
+        q: term,
+        part: "snippet",
+        maxResults: 3,
+        type: "video",
+        key: KEY,
+      },
+    });
+
+    this.setState({ videos: res.data.items, selectedVideo: res.data.items[0] });
+  };
+
+  onVideoSelect = (video) => {
+    this.setState({ selectedVideo: video });
+  };
+
+  render() {
+    return (
+      <>
+        <SearchBar onFormSubmit={this.onTermSubmit} />
+        <div className="video-player">
+          <VideoDetail video={this.state.selectedVideo} />
+          <VideoList
+            onVideoSelect={this.onVideoSelect}
+            videos={this.state.videos}
+          />
+        </div>
+      </>
+    );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    videos: Object.values(state.videos),
-  };
-};
-
-export default connect(mapStateToProps, { fetchVideos })(App);
+export default App;
