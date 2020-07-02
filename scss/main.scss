@@ -104,6 +104,14 @@ body {
 }
 
 // VideoDetail.js
+// Data not loaded yet
+.video-loading {
+  position: absolute;
+  content: "";
+  top: 25%;
+}
+
+// VideoDetail.js
 .video-detail {
   margin-top: 3rem;
   margin-left: 3rem;

@@ -62,6 +62,11 @@ body {
   margin: 1.5rem 1rem 1rem 1rem;
   border-radius: 5px; }
 
+.video-loading {
+  position: absolute;
+  content: "";
+  top: 25%; }
+
 .video-detail {
   margin-top: 3rem;
   margin-left: 3rem; }
