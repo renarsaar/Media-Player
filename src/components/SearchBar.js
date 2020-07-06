@@ -1,4 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+let musicStyles = {
+  border: "2px solid #6b9dec",
+  background: "#fff",
+};
+
+let videoStyles = {
+  border: "2px solid #e2812e",
+  backgroundColor: "#fff",
+};
 
 class SearchBar extends React.Component {
   state = { term: "" };
@@ -16,15 +27,25 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div className="searchbar">
+        <div className="navbar">
+          <Link className="link" to="/videos">
+            <div>Video Player</div>
+          </Link>
+          <Link className="link" to="/music">
+            <div>Music Player</div>
+          </Link>
+        </div>
         <form onSubmit={this.onFormSubmit}>
-          <label>Video Player</label>
           <input
             type="text"
             value={this.state.term}
             onChange={this.onInputChange}
             placeholder="Search..."
+            style={this.props.page === "/videos" ? videoStyles : musicStyles}
           />
-          <button>
+          <button
+            style={this.props.page === "/videos" ? videoStyles : musicStyles}
+          >
             <i className="fas fa-search"></i>
           </button>
         </form>

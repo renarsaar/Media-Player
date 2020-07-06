@@ -1,4 +1,34 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+@media (max-width: 1050px) {
+  .video-list .video-item img {
+    max-width: 80%;
+    max-height: 80%; }
+  .video-list .video-item .video-content h4 {
+    max-width: 80%; } }
+
+@media (max-width: 1050px) {
+  .video-list .video-item .video-title {
+    width: 190px; } }
+
+@media (max-width: 700px) {
+  .video-list .video-item .video-title {
+    width: 150px; } }
+
+@media (max-width: 630px) {
+  .video-player {
+    display: block; }
+  .video-detail {
+    padding-top: 1.5rem;
+    margin: 1.5rem; }
+    .video-detail .video-header h4 {
+      font-size: 1rem; }
+  .video-list .video-item .video-content {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 6px; }
+  .video-list .video-item .video-title {
+    width: 80%; } }
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,7 +37,6 @@
 body {
   font-family: "Raleway", sans-serif;
   background: #e2812e;
-  background: linear-gradient(90deg, #e2812e 0%, #e2a221 100%);
   color: #000;
   display: flex;
   justify-content: center;
@@ -18,7 +47,22 @@ body {
   background-color: #f4f4f4;
   padding: 0.5rem 2rem;
   border-radius: 6px;
-  margin: 1rem; }
+  margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  .searchbar .navbar {
+    cursor: pointer;
+    display: flex;
+    width: 70%; }
+    .searchbar .navbar .link {
+      margin: 0 2rem;
+      color: #333333;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem; }
+      .searchbar .navbar .link:hover {
+        color: #ccc; }
   .searchbar form {
     position: relative;
     display: flex;
@@ -43,9 +87,7 @@ body {
       right: 5px;
       border: 1px solid #e2812e;
       padding: 5px;
-      background: #e2812e;
       border-radius: 50%;
-      color: #f4f4f4;
       font-size: 1rem;
       z-index: 6; }
       .searchbar form button:focus {
@@ -53,11 +95,11 @@ body {
       .searchbar form button:active {
         transform: scale(1.05); }
 
-.video-player {
+.player {
   background: rgba(244, 244, 244, 0.8);
   display: flex;
   justify-content: center;
-  min-width: 85vw;
+  min-width: 90vw;
   min-height: 85vh;
   margin: 1.5rem 1rem 1rem 1rem;
   border-radius: 5px; }
@@ -123,32 +165,95 @@ body {
   100% {
     transform: rotate(360deg); } }
 
-@media (max-width: 1050px) {
-  .video-list .video-item img {
-    max-width: 80%;
-    max-height: 80%; }
-  .video-list .video-item .video-content h4 {
-    max-width: 80%; } }
+.music-player {
+  background: rgba(244, 244, 244, 0.8);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-width: 90vw;
+  min-height: 85vh;
+  margin: 1.5rem 1rem 1rem 1rem;
+  border-radius: 5px; }
 
-@media (max-width: 1050px) {
-  .video-list .video-item .video-title {
-    width: 190px; } }
+.music-container {
+  position: relative;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 20px 20px 0 rgba(221, 233, 252, 0.6);
+  display: flex;
+  padding: 1.3rem 1.9rem;
+  margin: 2rem auto;
+  z-index: 10;
+  width: 85%; }
 
-@media (max-width: 700px) {
-  .video-list .video-item .video-title {
-    width: 150px; } }
+.img-container {
+  position: relative;
+  width: 70px; }
 
-@media (max-width: 630px) {
-  .video-player {
-    display: block; }
-  .video-detail {
-    padding-top: 1.5rem;
-    margin: 1.5rem; }
-    .video-detail .video-header h4 {
-      font-size: 1rem; }
-  .video-list .video-item .video-content {
-    text-align: center;
-    width: 100%;
-    margin-bottom: 6px; }
-  .video-list .video-item .video-title {
-    width: 80%; } }
+.img-container::after {
+  content: "";
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 55%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, 50%); }
+
+.img-container img {
+  border-radius: 50%;
+  object-fit: cover;
+  height: 70px;
+  width: inherit;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  animation: rotate 3s linear infinite;
+  animation-play-state: paused; }
+
+.music-container.play .img-container img {
+  animation-play-state: running; }
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+.action-btn {
+  cursor: pointer;
+  background-color: #fff;
+  border: 0;
+  color: #dde9fc;
+  font-size: 1.9rem;
+  padding: 0.7rem;
+  margin: 0 1.3rem;
+  z-index: 10; }
+
+.action-btn:focus {
+  outline: 0; }
+
+.music-info {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 15px 15px 0 0;
+  position: absolute;
+  top: 0;
+  left: 30px;
+  width: calc(100% - 40px);
+  padding: 10px 10px 10px 150px; }
+
+.progress-container {
+  cursor: pointer;
+  background: #dde9fc;
+  border-radius: 5px;
+  margin: 1.7rem 0 0.7rem 0;
+  height: 4px;
+  width: 100%; }
+
+.progress {
+  background-color: #fe8daa;
+  border-radius: 5px;
+  height: 100%;
+  width: 0%;
+  transition: width 0.1s linear; }
