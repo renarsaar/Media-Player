@@ -300,7 +300,7 @@ body {
 }
 
 .progress-container {
-  cursor: pointer;
+  // cursor: pointer; MusicPlayer.js updateProgress()
   background: $blue-color;
   border-radius: 5px;
   margin: 1.7rem 0 0.7rem 0;

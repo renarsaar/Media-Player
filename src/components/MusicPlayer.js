@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 import deezer from "./apis/deezer";
 
 class MusicPlayer extends React.Component {
-  state = { music: [], curSong: "", play: false };
+  state = { music: [], curSong: "", play: false, progressWidth: null };
 
   constructor(props) {
     super(props);
@@ -34,7 +34,8 @@ class MusicPlayer extends React.Component {
 
   // Stop/Play song
   playSong = (i) => {
-    console.log(this.refCollection);
+    const musicContainer = this.refCollection[i].parentElement;
+
     // If click on the same song
     if (this.refCollection[i] === this.state.curSong) {
       this.setState({ play: false, curSong: "" });
@@ -47,7 +48,7 @@ class MusicPlayer extends React.Component {
         this.refCollection[j].nextSibling.nextSibling.firstChild.className =
           "fas fa-play";
 
-        this.refCollection[j].parentElement.className = "music-container";
+        musicContainer.className = "music-container";
       }
     } else {
       // Pause all songs && Change all icons to "play" before playing a new song
@@ -57,14 +58,14 @@ class MusicPlayer extends React.Component {
         this.refCollection[j].nextSibling.nextSibling.firstChild.className =
           "fas fa-play";
 
-        this.refCollection[j].parentElement.className = "music-container";
+        musicContainer.className = "music-container";
       }
 
       // Play selected song
       this.refCollection[i].play();
 
       // Spin record
-      this.refCollection[i].parentElement.className = "music-container play";
+      musicContainer.className = "music-container play";
 
       this.setState({ play: true, curSong: this.refCollection[i] });
 
@@ -74,6 +75,21 @@ class MusicPlayer extends React.Component {
     }
   };
 
+  // Update progress time
+  updateProgress = (e, i) => {
+    const duration = this.refCollection[i].duration;
+    const currentTime = this.refCollection[i].currentTime;
+    const proggressEl = this.refCollection[i].previousSibling.lastChild
+      .children[0];
+
+    const progressPercent = (currentTime / duration) * 100;
+
+    this.setState({ progressWidth: progressPercent });
+
+    proggressEl.style.width = this.state.progressWidth + "%";
+  };
+
+  // Render Music list to DOM
   renderMusic() {
     return this.state.music.map((song, i) => {
       return (
@@ -92,6 +108,7 @@ class MusicPlayer extends React.Component {
           <audio
             ref={(ref) => (this.refCollection[i] = ref)}
             src={song.preview}
+            onTimeUpdate={(e) => this.updateProgress(e, i)}
           ></audio>
 
           <div className="img-container">
