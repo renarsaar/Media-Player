@@ -76,7 +76,7 @@ class MusicPlayer extends React.Component {
   };
 
   // Update progress time
-  updateProgress = (e, i) => {
+  updateProgress = (i) => {
     const duration = this.refCollection[i].duration;
     const currentTime = this.refCollection[i].currentTime;
     const proggressEl = this.refCollection[i].previousSibling.lastChild
@@ -108,7 +108,7 @@ class MusicPlayer extends React.Component {
           <audio
             ref={(ref) => (this.refCollection[i] = ref)}
             src={song.preview}
-            onTimeUpdate={(e) => this.updateProgress(e, i)}
+            onTimeUpdate={() => this.updateProgress(i)}
           ></audio>
 
           <div className="img-container">

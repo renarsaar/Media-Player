@@ -28,10 +28,10 @@ class SearchBar extends React.Component {
     return (
       <div className="searchbar">
         <div className="navbar">
-          <Link className="link" to="/videos">
+          <Link className="link" to="/player/">
             <div>Video Player</div>
           </Link>
-          <Link className="link" to="/music">
+          <Link className="link" to="/player/music">
             <div>Music Player</div>
           </Link>
         </div>

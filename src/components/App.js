@@ -7,8 +7,8 @@ import MusicPlayer from "./MusicPlayer";
 const App = () => {
   return (
     <BrowserRouter>
-      <Route path="/videos" exact component={VideoPlayer} />
-      <Route path="/music" exact component={MusicPlayer} />
+      <Route path="/player/" exact component={VideoPlayer} />
+      <Route path="/player/music" exact component={MusicPlayer} />
     </BrowserRouter>
   );
 };
