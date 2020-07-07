@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBar from "./SearchBar";
 
-import deezer from "./apis/deezer";
+import songs from "./apis/songs";
 
 class MusicPlayer extends React.Component {
   state = { music: [], curSong: "", play: false, progressWidth: null };
@@ -21,12 +21,14 @@ class MusicPlayer extends React.Component {
   // Axios request to deezer API
   onTermSubmit = async (term) => {
     if (term !== "") {
-      const res = await deezer.get("/search", {
+      const res = await songs.get("/search", {
         params: {
           q: term,
           limit: 7,
         },
       });
+
+      console.log(res);
 
       this.setState({ music: res.data.data });
     }

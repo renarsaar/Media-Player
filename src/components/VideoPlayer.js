@@ -1,5 +1,5 @@
 import React from "react";
-import youtube from "./apis/videos";
+import videos from "./apis/videos";
 
 import SearchBar from "./SearchBar";
 import VideoDetail from "./VideoDetail";
@@ -16,7 +16,7 @@ class VideoPlayer extends React.Component {
   onTermSubmit = async (term) => {
     const KEY = "AIzaSyCGPm14uBuAUYoBHN0XnjxsRPgBqTy3xMs";
 
-    const res = await youtube.get("/search", {
+    const res = await videos.get("/search", {
       params: {
         q: term,
         part: "snippet",
