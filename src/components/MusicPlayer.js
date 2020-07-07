@@ -1,7 +1,8 @@
 import React from "react";
 import SearchBar from "./SearchBar";
 
-import songs from "./apis/songs";
+import { connect } from "react-redux";
+import { fetchSongs } from "./actions";
 
 class MusicPlayer extends React.Component {
   state = { music: [], curSong: "", play: false, progressWidth: null };
@@ -15,23 +16,11 @@ class MusicPlayer extends React.Component {
 
   // Default Music
   componentDidMount() {
-    this.onTermSubmit("AC DC");
+    this.props.fetchSongs("AC DC");
   }
 
-  // Axios request to deezer API
-  onTermSubmit = async (term) => {
-    if (term !== "") {
-      const res = await songs.get("/search", {
-        params: {
-          q: term,
-          limit: 7,
-        },
-      });
-
-      console.log(res);
-
-      this.setState({ music: res.data.data });
-    }
+  onTermSubmit = (term) => {
+    if (term !== "") this.props.fetchSongs(term);
   };
 
   // Stop/Play song
@@ -93,7 +82,7 @@ class MusicPlayer extends React.Component {
 
   // Render Music list to DOM
   renderMusic() {
-    return this.state.music.map((song, i) => {
+    return this.props.songs.map((song, i) => {
       return (
         <div className="music-container" key={song.id}>
           <div className="music-info">
@@ -128,6 +117,16 @@ class MusicPlayer extends React.Component {
   render() {
     document.body.style.background =
       "linear-gradient(0deg,rgb(247, 247, 247) 23.8%,rgb(221, 233, 252) 92%)";
+
+    // If store data not loaded
+    if (!this.props.songs) {
+      return (
+        <div className="music-player">
+          <div className="loading ld-dual-ring"></div>
+        </div>
+      );
+    }
+
     return (
       <>
         <SearchBar
@@ -140,4 +139,10 @@ class MusicPlayer extends React.Component {
   }
 }
 
-export default MusicPlayer;
+const mapStateToProps = (state) => {
+  return {
+    songs: state.songs.songs,
+  };
+};
+
+export default connect(mapStateToProps, { fetchSongs })(MusicPlayer);

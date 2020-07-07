@@ -4,7 +4,7 @@ import videos from "../apis/videos";
 import songs from "../apis/songs";
 
 export const fetchVideos = (term) => async (dispatch) => {
-  const KEY = "AIzaSyCGPm14uBuAUYoBHN0XnjxsRPgBqTy3xMs";
+  const KEY = "AIzaSyCvK7TxuUPsyOD83Xk5SXHt9vjnE3Ar64k";
 
   const res = await videos.get("/search", {
     params: {
@@ -16,7 +16,7 @@ export const fetchVideos = (term) => async (dispatch) => {
     },
   });
 
-  dispatch({ type: FETCH_VIDEOS, payload: res.data });
+  dispatch({ type: FETCH_VIDEOS, payload: res.data.items });
 };
 
 export const fetchSongs = (term) => async (dispatch) => {
@@ -27,5 +27,5 @@ export const fetchSongs = (term) => async (dispatch) => {
     },
   });
 
-  dispatch({ type: FETCH_SONGS, payload: res.data });
+  dispatch({ type: FETCH_SONGS, payload: res.data.data });
 };
