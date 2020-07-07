@@ -41,10 +41,10 @@ class SearchBar extends React.Component {
             value={this.state.term}
             onChange={this.onInputChange}
             placeholder="Search..."
-            style={this.props.page === "/videos" ? videoStyles : musicStyles}
+            style={this.props.page === "/player/" ? videoStyles : musicStyles}
           />
           <button
-            style={this.props.page === "/videos" ? videoStyles : musicStyles}
+            style={this.props.page === "/player/" ? videoStyles : musicStyles}
           >
             <i className="fas fa-search"></i>
           </button>
