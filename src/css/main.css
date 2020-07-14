@@ -104,11 +104,6 @@ body {
   margin: 1.5rem 1rem 1rem 1rem;
   border-radius: 5px; }
 
-.video-loading {
-  position: absolute;
-  content: "";
-  top: 25%; }
-
 .video-detail {
   margin-top: 3rem;
   margin-left: 3rem; }
@@ -144,6 +139,12 @@ body {
     .video-list .video-item .video-title {
       width: 300px; }
 
+.loading {
+  position: absolute;
+  content: "";
+  top: 20%;
+  left: 45%; }
+
 .ld-dual-ring {
   display: block;
   margin: 150px auto; }
@@ -155,15 +156,9 @@ body {
   height: 85px;
   margin: 10px;
   border-radius: 50%;
-  border: 6px solid #e2812e;
-  border-color: #e2812e transparent;
-  animation: ld-dual-ring 1.2s linear infinite; }
-
-@keyframes ld-dual-ring {
-  0% {
-    transform: rotate(0deg); }
-  100% {
-    transform: rotate(360deg); } }
+  border: 6px solid #ccc;
+  border-color: #ccc transparent;
+  animation: rotate 1.2s linear infinite; }
 
 .music-player {
   background: rgba(244, 244, 244, 0.8);
@@ -215,12 +210,6 @@ body {
 .music-container.play .img-container img {
   animation-play-state: running; }
 
-@keyframes rotate {
-  from {
-    transform: rotate(0deg); }
-  to {
-    transform: rotate(360deg); } }
-
 .action-btn {
   cursor: pointer;
   background-color: #fff;
@@ -256,3 +245,9 @@ body {
   height: 100%;
   width: 0%;
   transition: width 0.1s linear; }
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }

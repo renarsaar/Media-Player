@@ -121,14 +121,6 @@ body {
 }
 
 // VideoDetail.js
-// Data not loaded yet
-.video-loading {
-  position: absolute;
-  content: "";
-  top: 25%;
-}
-
-// VideoDetail.js
 .video-detail {
   margin-top: 3rem;
   margin-left: 3rem;
@@ -181,6 +173,14 @@ body {
   }
 }
 
+// Data not loaded yet
+.loading {
+  position: absolute;
+  content: "";
+  top: 20%;
+  left: 45%;
+}
+
 // Dual Ring Loader
 .ld-dual-ring {
   display: block;
@@ -194,18 +194,9 @@ body {
   height: 85px;
   margin: 10px;
   border-radius: 50%;
-  border: 6px solid $main-color;
-  border-color: $main-color transparent;
-  animation: ld-dual-ring 1.2s linear infinite;
-}
-
-@keyframes ld-dual-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  border: 6px solid $medium-color;
+  border-color: $medium-color transparent;
+  animation: rotate 1.2s linear infinite;
 }
 
 // MusicPlayer.js
@@ -265,15 +256,6 @@ body {
   animation-play-state: running;
 }
 
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .action-btn {
   cursor: pointer;
   background-color: #fff;
@@ -314,4 +296,13 @@ body {
   height: 100%;
   width: 0%;
   transition: width 0.1s linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
