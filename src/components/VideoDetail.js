@@ -3,7 +3,7 @@ import React from "react";
 const VideoDetail = ({ video }) => {
   // Loading Spinner
   if (!video) {
-    return <div className="video-loading ld-dual-ring"></div>;
+    return <div className="loading ld-dual-ring"></div>;
   }
 
   // Return video, title, desc

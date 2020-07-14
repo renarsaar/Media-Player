@@ -1,4 +1,4 @@
-import { FETCH_VIDEOS } from "../actions/types";
+import { FETCH_VIDEOS, SELECT_VIDEO } from "../actions/types";
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -7,6 +7,12 @@ export default (state = [], action) => {
         ...state,
         videos: action.payload,
         firstVideo: action.payload[0],
+      };
+
+    case SELECT_VIDEO:
+      return {
+        ...state,
+        firstVideo: action.payload,
       };
 
     default:

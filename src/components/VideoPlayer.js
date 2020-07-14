@@ -1,5 +1,6 @@
 import React from "react";
-import videos from "./apis/videos";
+import { connect } from "react-redux";
+import { fetchVideos, selectVideo } from "./actions";
 
 import SearchBar from "./SearchBar";
 import VideoDetail from "./VideoDetail";
@@ -9,33 +10,32 @@ class VideoPlayer extends React.Component {
   state = { videos: [], selectedVideo: null };
 
   // Default videos
-  componentDidMount() {
+  componentDidMount = () => {
     this.onTermSubmit("chessable masters");
-  }
-
-  onTermSubmit = async (term) => {
-    const KEY = "AIzaSyCGPm14uBuAUYoBHN0XnjxsRPgBqTy3xMs";
-
-    const res = await videos.get("/search", {
-      params: {
-        q: term,
-        part: "snippet",
-        maxResults: 3,
-        type: "video",
-        key: KEY,
-      },
-    });
-
-    this.setState({ videos: res.data.items, selectedVideo: res.data.items[0] });
   };
 
+  // Fetch videos from store
+  onTermSubmit = (term) => {
+    this.props.fetchVideos(term);
+  };
+
+  // Change the selected video
   onVideoSelect = (video) => {
-    this.setState({ selectedVideo: video });
+    this.props.selectVideo(video);
   };
 
   render() {
     document.body.style.background =
       "linear-gradient(90deg, rgba(226, 129, 46, 1) 0%, rgba(226, 162, 33, 1) 100%)";
+
+    // If Store data has not loaded yet
+    if (!this.props.videos.videos) {
+      return (
+        <div className="player">
+          <div className="loading ld-dual-ring"></div>
+        </div>
+      );
+    }
 
     return (
       <>
@@ -44,10 +44,10 @@ class VideoPlayer extends React.Component {
           onFormSubmit={this.onTermSubmit}
         />
         <div className="player">
-          <VideoDetail video={this.state.selectedVideo} />
+          <VideoDetail video={this.props.videos.firstVideo} />
           <VideoList
             onVideoSelect={this.onVideoSelect}
-            videos={this.state.videos}
+            videos={this.props.videos.videos}
           />
         </div>
       </>
@@ -55,4 +55,12 @@ class VideoPlayer extends React.Component {
   }
 }
 
-export default VideoPlayer;
+const mapStateToProps = (state) => {
+  return {
+    videos: state.videos,
+  };
+};
+
+export default connect(mapStateToProps, { fetchVideos, selectVideo })(
+  VideoPlayer
+);
