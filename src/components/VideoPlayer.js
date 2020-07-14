@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchVideos, selectVideo } from "./actions";
+import { fetchVideos, selectVideo } from "../actions";
 
 import SearchBar from "./SearchBar";
 import VideoDetail from "./VideoDetail";

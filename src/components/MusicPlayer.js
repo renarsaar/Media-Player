@@ -2,7 +2,7 @@ import React from "react";
 import SearchBar from "./SearchBar";
 
 import { connect } from "react-redux";
-import { fetchSongs } from "./actions";
+import { fetchSongs } from "../actions";
 
 class MusicPlayer extends React.Component {
   state = { music: [], curSong: "", play: false, progressWidth: null };
